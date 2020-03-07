@@ -1,0 +1,28 @@
+{
+    "name": "gd-video-player",
+    "version": "1.0.0",
+    "description": "A simple video player for Google Drive",
+    "author": "Gomgom",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "devDependencies": {
+        "asar": "^2.1.0",
+        "electron": "^8.0.3",
+        "electron-builder": "^22.4.0",
+        "electron-packager": "^14.2.1"
+    },
+    "dependencies": {},
+    "license": "MIT",
+    "repository": "https://github.com/gomgom/gd-video-player",
+    "bugs": "https://github.com/gomgom/gd-video-player/issues",
+    "keywords": [
+        "Google Drive",
+        "Video Player",
+        "Google Drive Video",
+        "Video"
+    ]
+}
