@@ -1,8 +1,8 @@
 # GD Video Player (gd-video-player)
 
-![GitHub License](https://img.shields.io/github/license/gomgom/gd-video-player)
-![GitHub Release Version](https://img.shields.io/github/v/release/gomgom/gd-video-player)
-![GitHub Code Size](https://img.shields.io/github/languages/code-size/gomgom/gd-video-player)
+[![GitHub License](https://img.shields.io/github/license/gomgom/gd-video-player)](https://github.com/gomgom/gd-video-player/blob/master/LICENSE)
+[![GitHub Release Version](https://img.shields.io/github/v/release/gomgom/gd-video-player)](https://github.com/gomgom/gd-video-player/releases)
+[![GitHub Code Size](https://img.shields.io/github/languages/code-size/gomgom/gd-video-player)]()
 ![GitHub Issues](https://img.shields.io/github/issues/gomgom/gd-video-player)
 
 ![Title Image](https://drive.google.com/uc?export=view&id=1YiLPXKPxJir82-zbWRO0MKs0AhN6Jb5T)
