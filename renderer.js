@@ -3,15 +3,23 @@
             url = $('#url').val()
             id = null
 
-            // 입력된 값에서 ID 추출
-            if (url.match(/^https:\/\/drive\.google\.com\/open\?id\=(.*)/g)) {
-                id = url.split('=')[1]
+            // 입력된 값에서 ID 추출 (기존 open?id=... 링크와 현재 file/d/ID/view 링크 모두 지원)
+            try {
+                parsed = new URL(url)
+                fileMatch = parsed.pathname.match(/^\/file\/d\/([^/]+)/)
+                if (fileMatch) {
+                    id = fileMatch[1]
+                } else if (parsed.pathname === '/open' && parsed.searchParams.has('id')) {
+                    id = parsed.searchParams.get('id')
+                }
+            } catch (e) {
+                id = null
             }
 
             // ID를 찾으면 작업 처리
             if (id) {
                 // 플레이어 삽입 스크립트
-                player = '<iframe id="player_iframe" src="https://drive.google.com/file/d/' + id + '/preview" webkitallowfullscreen mozallowfullscreen allowfullscreen></webview>'
+                player = '<iframe id="player_iframe" src="https://drive.google.com/file/d/' + id + '/preview" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 
                 $('#player').html(player)
                 $('#window_size').css('display', 'inline')
@@ -29,13 +37,12 @@
         }
         $('#window_size span').click(function() {
             size = $(this).attr('id')
-            const { ipcRenderer } = require('electron')
             if (size == 'w_small') {
-                ipcRenderer.send('resize-window-small')
+                window.gdPlayer.resizeWindow('small')
             } else if (size == 'w_medium') {
-                ipcRenderer.send('resize-window-medium')
+                window.gdPlayer.resizeWindow('medium')
             } else if (size == 'w_large') {
-                ipcRenderer.send('resize-window-large')
+                window.gdPlayer.resizeWindow('large')
             }
             if (typeof(size_list[size]) != 'undefined') {
                 width = size_list[size]
@@ -46,13 +53,11 @@
         })
 
         $('#always_on_top').click(function() {
-            const { ipcRenderer } = require('electron')
-            ipcRenderer.send('always-on-top')
+            window.gdPlayer.toggleAlwaysOnTop()
         })
 
         $('#maximize').click(function() {
-            const { ipcRenderer } = require('electron')
-            ipcRenderer.send('maximize')
+            window.gdPlayer.maximize()
 
             $('#player').css('width', "95%")
             $('#player').css('height', "90%")
@@ -62,8 +67,7 @@
         })
 
         $('#unmaximize').click(function() {
-            const { ipcRenderer } = require('electron')
-            ipcRenderer.send('resize-window-small')
+            window.gdPlayer.resizeWindow('small')
             width = 700
             height = Math.round(width * 0.5625)
             $('#player').css('width', width)
