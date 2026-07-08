@@ -1,12 +1,12 @@
     $(function() {
         $('#load_button').click(function() {
-            url = $('#url').val()
-            id = null
+            const url = $('#url').val()
+            let id = null
 
             // 입력된 값에서 ID 추출 (기존 open?id=... 링크와 현재 file/d/ID/view 링크 모두 지원)
             try {
-                parsed = new URL(url)
-                fileMatch = parsed.pathname.match(/^\/file\/d\/([^/]+)/)
+                const parsed = new URL(url)
+                const fileMatch = parsed.pathname.match(/^\/file\/d\/([^/]+)/)
                 if (fileMatch) {
                     id = fileMatch[1]
                 } else if (parsed.pathname === '/open' && parsed.searchParams.has('id')) {
@@ -19,7 +19,7 @@
             // ID를 찾으면 작업 처리
             if (id) {
                 // 플레이어 삽입 스크립트
-                player = '<iframe id="player_iframe" src="https://drive.google.com/file/d/' + id + '/preview" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+                const player = '<iframe id="player_iframe" src="https://drive.google.com/file/d/' + id + '/preview" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 
                 $('#player').html(player)
                 $('#window_size').css('display', 'inline')
